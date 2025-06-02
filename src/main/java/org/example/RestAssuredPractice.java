@@ -60,8 +60,7 @@ public class RestAssuredPractice {
                         .assertThat().statusCode(200).extract().response().asPrettyString();
 
         //parse this response using jsonpath method to assert if address was correctly updated:
-        JsonPath js = new JsonPath(getPlaceResponse);
-        String addressFromResponse = js.getString("address");
+        String addressFromResponse = ReusuableMethods.parseJsonResponse(getPlaceResponse, "address");
 
         //use TestNG
         Assert.assertEquals(addressFromResponse,updatedAddress);
