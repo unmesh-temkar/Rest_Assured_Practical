@@ -7,9 +7,6 @@ import org.testng.Assert;
 import static io.restassured.RestAssured.*;
 import static org.hamcrest.Matchers.*;
 
-/**
- * Hello world!
- */
 public class RestAssuredPractice {
     public static void main(String[] args) {
 
