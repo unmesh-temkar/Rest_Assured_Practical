@@ -20,7 +20,7 @@ public class Payload {
                 "}\n";
     }
 
-    public static String updatePlace(String placeId,String address) {
+    public static String updatePlace(String placeId, String address) {
         return "{\n" +
                 "\"place_id\":\"" + placeId + "\",\n" +
                 "\"address\":\"" + address + "\",\n" +
@@ -28,8 +28,8 @@ public class Payload {
                 "}\n";
     }
 
-    public static String complexJsonParse(){
-        return"{\n" +
+    public static String complexJsonParse() {
+        return "{\n" +
                 "  \"dashboard\": {\n" +
                 "    \"purchaseAmount\": 910,\n" +
                 "    \"website\": \"rahulshettyacademy.com\"\n" +
@@ -52,5 +52,15 @@ public class Payload {
                 "    }\n" +
                 "  ]\n" +
                 "}";
+    }
+
+    public static String addBookPayload(String isbn, String aisle) {
+        return "{\n" +
+                "\n" +
+                "\"name\":\"Learn Appium Automation with Java\",\n" +
+                "\"isbn\":\"" + isbn + "\",\n" +
+                "\"aisle\":\"" + aisle + "\",\n" +
+                "\"author\":\"John foe\"\n" +
+                "}\n";
     }
 }
