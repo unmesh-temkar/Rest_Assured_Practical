@@ -28,12 +28,18 @@ public class DynamicJsonTest {
         System.out.println("-------------------------------------------");
     }
 
-    @Test(dataProvider = "BooksData")
+    @Test
     public void deleteBooks(){
         RestAssured.baseURI = "http://216.10.245.166";
 
         String response =
-                given().
+                        given()
+                            .header("Content-Type", "application/json").body(Payload.deleteBook("abc123"))
+                        .when()
+                            .post(":/Library/DeleteBook.php")
+                        .then()
+                            .assertThat().statusCode(200).extract().response().asPrettyString();
+        System.out.println("-------------------------------------------");
     }
 
     @DataProvider(name = "BooksData")

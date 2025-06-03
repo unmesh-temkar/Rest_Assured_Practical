@@ -63,4 +63,12 @@ public class Payload {
                 "\"author\":\"John foe\"\n" +
                 "}\n";
     }
+
+    public static String deleteBook(String id){
+        return "{\n" +
+                " \n" +
+                "\"ID\" : \""+id+"\"\n" +
+                " \n" +
+                "} \n";
+    }
 }
