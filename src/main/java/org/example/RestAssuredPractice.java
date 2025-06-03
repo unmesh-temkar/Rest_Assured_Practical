@@ -4,11 +4,15 @@ import io.restassured.RestAssured;
 import io.restassured.path.json.JsonPath;
 import org.testng.Assert;
 
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+
 import static io.restassured.RestAssured.*;
 import static org.hamcrest.Matchers.*;
 
 public class RestAssuredPractice {
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException {
 
         //Set RestAssured class's static parameter baseURI first:
         RestAssured.baseURI = "https://rahulshettyacademy.com/";
@@ -19,7 +23,8 @@ public class RestAssuredPractice {
                 given().log().all()
                         .queryParam("key", "qaclick123")
                         .header("Content-Type", "application/json")
-                        .body(Payload.addPlace())
+//                        .body(Payload.addPlace())
+                        .body(new String(Files.readAllBytes(Path.of("src/test/resources/PayloadJSONs/AddPlace.json"))))//providing body using external Json
                         .when()
                         .post("maps/api/place/add/json")
                         .then().log().all()
