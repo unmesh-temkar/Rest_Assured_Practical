@@ -1,6 +1,6 @@
-package POJO;
+package POJO.getCourse;
 
-public class Api {
+public class WebAutomation {
 
     private String courseTitle;
     private String price;

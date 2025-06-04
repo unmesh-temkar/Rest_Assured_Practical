@@ -1,4 +1,4 @@
-package POJO;
+package POJO.getCourse;
 
 public class GetCourseResponse {
 

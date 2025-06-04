@@ -1,6 +1,6 @@
-package POJO;
+package POJO.getCourse;
 
-public class Mobile {
+public class Api {
 
     private String courseTitle;
     private String price;

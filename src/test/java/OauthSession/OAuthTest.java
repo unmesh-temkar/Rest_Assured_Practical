@@ -2,8 +2,13 @@ package OauthSession;
 
 import static io.restassured.RestAssured.*;
 
+import POJO.getCourse.Api;
+import POJO.getCourse.GetCourseResponse;
+import POJO.getCourse.WebAutomation;
 import io.restassured.path.json.JsonPath;
 import org.testng.annotations.Test;
+
+import java.util.List;
 
 public class OAuthTest {
     private String accessToken;
@@ -34,5 +39,30 @@ public class OAuthTest {
                         .then().log().all()
                         .assertThat().statusCode(401).extract().response().asPrettyString();
         System.out.println("--------------> response: \n" + response);
+    }
+
+    @Test(testName = "get course deserialize", dependsOnMethods = "getAccessToken")
+    public void getCourseDeserialize() {
+        GetCourseResponse response =
+                given()
+                        .queryParam("access_token", accessToken)
+                        .when()
+                        .get("https://rahulshettyacademy.com/oauthapi/getCourseDetails")
+                        .then()
+                        .assertThat().statusCode(401).extract().response().as(GetCourseResponse.class);
+        System.out.println("--------------> instructor: " + response.getInstructor());
+
+        //get price of SoapUi courses
+        List<Api> apiList = response.getCourses().getApi();
+        for (Api api : apiList) {
+            if (api.getCourseTitle().equalsIgnoreCase("SoapUI Webservices testing")) {
+                System.out.println("-----------------------");
+                System.out.println("Title: " + api.getCourseTitle());
+                System.out.println("Price: " + api.getPrice());
+            }
+        }
+
+        //sum of all prices:
+
     }
 }
