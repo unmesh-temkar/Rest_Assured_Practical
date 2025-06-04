@@ -26,11 +26,13 @@ public class OAuthTest {
 
     @Test(testName = "get course details", dependsOnMethods = "getAccessToken")
     public void getCourseDetails() {
-        given().log().all()
-                .queryParam("access_token", accessToken)
-                .when()
-                .get("https://rahulshettyacademy.com/oauthapi/getCourseDetails")
-                .then().log().all()
-                .assertThat().statusCode(401);
+        String response =
+                given().log().all()
+                        .queryParam("access_token", accessToken)
+                        .when()
+                        .get("https://rahulshettyacademy.com/oauthapi/getCourseDetails")
+                        .then().log().all()
+                        .assertThat().statusCode(401).extract().response().asPrettyString();
+        System.out.println("--------------> response: \n" + response);
     }
 }
