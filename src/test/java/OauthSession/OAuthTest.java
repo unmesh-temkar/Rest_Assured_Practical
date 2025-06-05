@@ -6,12 +6,18 @@ import POJO.getCourse.Api;
 import POJO.getCourse.GetCourseResponse;
 import POJO.getCourse.WebAutomation;
 import io.restassured.path.json.JsonPath;
+import org.testng.Assert;
 import org.testng.annotations.Test;
 
+import java.lang.reflect.Array;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 public class OAuthTest {
     private String accessToken;
+    String[] expectedCourseTitlesInWebAutomation = {"Selenium Webdriver Java", "Cypress", "Protractor"};
+    ArrayList<String> actualCourseTitlesInWebAutomation = new ArrayList<>();
 
     @Test(testName = "get access token")
     public void getAccessToken() {
@@ -62,7 +68,21 @@ public class OAuthTest {
             }
         }
 
-        //sum of all prices:
+        //print all course titles of web automation:
+        List<WebAutomation> webAutomation = response.getCourses().getWebAutomation();
+        for (WebAutomation web : webAutomation) {
+            actualCourseTitlesInWebAutomation.add(web.getCourseTitle());
+        }
 
+        //compare expected array with actual array list:
+        //1. first we convert expected array to array list:
+        List<String> expectedCourseTitles = Arrays.asList(expectedCourseTitlesInWebAutomation);
+
+        boolean isResponseValid = expectedCourseTitles.equals(actualCourseTitlesInWebAutomation);
+        Assert.assertTrue(isResponseValid);
+        System.out.println("-------------------");
+        System.out.println("actualCourseTitlesInWebAutomation: " + actualCourseTitlesInWebAutomation);
+        System.out.println("expectedCourseTitles: " + expectedCourseTitles);
+        System.out.println("isResponseValid: " + isResponseValid);
     }
 }
